@@ -1,6 +1,6 @@
 <?php
 
-var $url = 'localhost:8182/sql/q';
+var $fetchUrl='https://www.amazon.com/Best-Sellers-Toys-Games/zgbs/toys-and-games/ref=zg_bs_toys-and-games_home_all?pf_rd_p=089b8285-7691-4849-a7f5-b2fca56bf24a&pf_rd_s=center-1&pf_rd_t=2101&pf_rd_i=home&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=7Z41QZGQ4X56MJK1CJV0&pf_rd_r=7Z41QZGQ4X56MJK1CJV0&pf_rd_p=089b8285-7691-4849-a7f5-b2fca56bf24a';
 var $sql=<<<EOF
 select
     dom_base_uri(dom) as url,
@@ -12,12 +12,13 @@ select
     dom_first_attr(dom, 'span.zg-item div img[src]', 'src') as `pic`,
     str_substring_between(dom_first_attr(dom, 'span.zg-item div a i.a-icon-star', 'class'), ' a-star-', ' ') as score,
     dom_first_text(dom, 'span.zg-item div a:has(i.a-icon-star) ~ a') as starnum
-from load_and_select(@url, 'ol#zg-ordered-list > li.zg-item-immersion');
+from load_and_select('$fetchUrl', 'ol#zg-ordered-list > li.zg-item-immersion');
 EOF;
 
+var $url = 'http://119.45.149.30:8182/api/x/sql/json';
 var $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($sql)));
+curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($sql))); // check if the length be correct
 curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($sql));
 curl_setopt($curl, CURLOPT_VERBOSE, true);
