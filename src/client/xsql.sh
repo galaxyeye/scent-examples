@@ -15,12 +15,14 @@ select
 from load_and_select(@url, 'ol#zg-ordered-list > li.zg-item-immersion');
 "
 
+# remove control characters
 sql=$(echo "$sql" | tr -s "[:cntrl:]" " ")
+# replace @url by the actual target url
 sql=${sql/@url/\'$targetUrl\'}
+# build the json data to send
 json="{\"sql\": \"$sql\"}"
 
-echo $json
-#exit
+# echo $json
 
 host=119.45.149.30
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "$json" "http://$host:8182/api/x/sql/json"

@@ -49,8 +49,5 @@ fun main(args: Array<String>) {
 
     val crawler = context.getBean<RepeatP1D1Crawler>()
 
-    if (start > 0) crawler.categoryUrlStart = start
-    if (limit > 0) crawler.categoryUrlLimit = limit
-
     if (test) crawler.test() else crawler.run()
 }
