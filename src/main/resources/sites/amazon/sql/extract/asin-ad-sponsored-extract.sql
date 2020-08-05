@@ -9,10 +9,10 @@ select
     dom_element_sibling_index(dom) as ad_asin_postion,
     dom_first_attr(dom, 'div[data-asin]', 'data-asin') as ad_asin,
     dom_first_attr(dom, 'div[data-asin]', 'data-asin') as ad_asin_bsr,
-    dom_first_href(dom, 'div.a-section > a') as ad_asin_url,
-    dom_first_text(dom, 'div.a-section > a > div:expr(img=0 && char>30)') as ad_asin_title,
-    dom_first_text(dom, 'div.a-section > div a span.a-color-price') as ad_asin_price,
-    dom_first_attr(dom, 'div.a-section > a img[data-a-dynamic-image]', 'src') as ad_asin_img,
-    str_substring_after(dom_first_attr(dom, 'div.a-section > div > a i.a-icon-star', 'class'), ' a-star-') as ad_asin_score,
-    dom_first_text(dom, 'div.a-section > div > a i.a-icon-star ~ span') as ad_asin_starnum
+    dom_first_href(dom, 'div[data-asin] > a') as ad_asin_url,
+    dom_first_text(dom, 'div[data-asin] > a > div:expr(img=0 && char>30)') as ad_asin_title,
+    dom_first_text(dom, 'div[data-asin] > div a span.a-color-price') as ad_asin_price,
+    dom_first_attr(dom, 'div[data-asin] > a img[data-a-dynamic-image]', 'src') as ad_asin_img,
+    str_substring_after(dom_first_attr(dom, 'div[data-asin] > div > a i.a-icon-star', 'class'), ' a-star-') as ad_asin_score,
+    dom_first_text(dom, 'div[data-asin] > div > a i.a-icon-star ~ span') as ad_asin_starnum
 from load_and_select(@url, '#sp_detail ol li');
