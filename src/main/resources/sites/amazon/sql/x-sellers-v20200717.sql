@@ -12,4 +12,4 @@ select
     dom_all_texts(dom, '#feedback-content #feedback-summary-table tr:contains(Negative) td') as `badstarpercent`,
     dom_all_texts(dom, '#feedback-content #feedback-summary-table tr:contains(Count) td') as `feedback_num_12`,
     dom_all_texts(dom, '#feedback-content #feedback-summary-table tr:contains(Count) td') as `feedback_num`
-from dom_select(dom_load('{{url}}'), ':root body');
+from dom_select(dom_load(@url), ':root body');

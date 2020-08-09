@@ -16,4 +16,4 @@ select
     length(dom_all_imgs(dom, 'img[data-hook=review-image-tile]')) as `ispic`,
     str_first_integer(dom_first_text(dom, '.review-comments .cr-vote .cr-vote-text, span[data-hook=helpful-vote-statement]'), 0) as `helpfulnum`,
     dom_first_text(dom, 'a[data-hook=format-strip]') as `sku`
-from load_and_select('{{url}}', '#cm_cr-review_list > div[data-hook=review]');
+from load_and_select(@url, '#cm_cr-review_list > div[data-hook=review]');

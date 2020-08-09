@@ -48,4 +48,4 @@ select
     dom_first_text(dom, 'table#histogramTable:expr(width > 100) td:contains(2 star) ~ td:contains(%)') as `score2percent`,
     dom_first_text(dom, 'table#histogramTable:expr(width > 100) td:contains(1 star) ~ td:contains(%)') as `score1percent`,
     dom_first_href(dom, '#reviews-medley-footer a') as `reviewsurl`
-from dom_select(dom_load('{{url}}'), ':root body');
+from load_and_select(@url, ':root body');
