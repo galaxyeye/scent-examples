@@ -25,7 +25,7 @@ open class StreamingSqlCrawler(
         private val context: ScentContext
 ): CommonSqlExtractor(context) {
     companion object {
-        private val metricRegistry = SharedMetricRegistries.getOrCreate("pulsar")
+        private val metricRegistry = SharedMetricRegistries.getOrCreate(AppConstants.DEFAULT_METRICS_NAME)
         private val numRunningTasks = AtomicInteger()
 
         init {

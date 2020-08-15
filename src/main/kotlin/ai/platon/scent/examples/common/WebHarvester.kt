@@ -6,7 +6,7 @@ import ai.platon.pulsar.dom.FeaturedDocument
 import ai.platon.scent.ScentContext
 import ai.platon.scent.ScentSession
 import ai.platon.scent.context.ScentContexts
-import ai.platon.scent.dom.FullFeatureCalculator
+import ai.platon.scent.dom.Level2FeatureCalculator
 import ai.platon.scent.dom.HarvestOptions
 import ai.platon.scent.dom.nodes.annotateNodes
 import com.google.common.collect.Lists
@@ -250,7 +250,7 @@ open class WebHarvester(val context: ScentContext): Crawler() {
         }
 
         val numDocuments = FeaturedDocument.globalNumDocuments
-        val numNodes = FullFeatureCalculator.globalNumNodes
+        val numNodes = Level2FeatureCalculator.globalNumNodes
         log.info("Allocated total $numDocuments documents and $numNodes DOM nodes")
         val sortedTaskTimes = taskTimes.entries.toList().sortedByDescending { it.value }
         Lists.partition(sortedTaskTimes, 20)

@@ -51,11 +51,11 @@ open class CommonSqlExtractor(context: ScentContext): Crawler(context) {
         }
     }
 
-    fun query(sql: String, printResult: Boolean = true): ResultSet {
+    fun query(sql: String, printResult: Boolean = true, withHeader: Boolean = true): ResultSet {
         try {
             val rs = stat.executeQuery(sql)
             if (printResult) {
-                println(ResultSetFormatter(rs))
+                println(ResultSetFormatter(rs, withHeader = withHeader))
             }
             return rs
         } catch (e: Throwable) {

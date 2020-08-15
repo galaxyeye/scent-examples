@@ -7,6 +7,7 @@ import ai.platon.scent.examples.tools.SqlConverter
 
 fun main() = withContext { cx ->
     val productUrl = "https://www.amazon.com/LAGSHIAN-Elegant-Ruffles-Shoulder-Evening/dp/B07DY9HLZ8/ref=zg_bs_11006702011_1?_encoding=UTF8&psc=1&refRID=HV43R6PJNHN3JYK1D2JA"
+    val productAlsoRiew = "https://www.amazon.com/Seagate-Portable-External-Hard-Drive/dp/B07CRG94G3/ref=lp_16225007011_1_11?s=computers-intl-ship&ie=UTF8&qid=1596590947&sr=1-11"
     val offerListingUrl = "https://www.amazon.com/gp/offer-listing/B076H3SRXG/ref=dp_olp_NEW_mbc?ie=UTF8&condition=NEW"
     val asinBestUrl = "https://www.amazon.com/Best-Sellers-Automotive/zgbs/automotive/ref=zg_bs_nav_0"
     val sellerUrl = "https://www.amazon.com/sp?_encoding=UTF8&asin=&isAmazonFulfilled=1&isCBA=&marketplaceID=ATVPDKIKX0DER&orderID=&protocol=current&seller=A2QJQR8DPHL921&sshmPath="
@@ -18,7 +19,7 @@ fun main() = withContext { cx ->
     val extractor = CommonSqlExtractor(cx)
 
     var i = 0
-    listOf(productUrl to "asin-ad-also-view-extract.sql",
+    listOf(productAlsoRiew to "asin-ad-also-view-extract.sql",
             productUrl to "asin-ad-similiar-extract.sql",
             productUrl to "asin-ad-sponsored-extract.sql",
             asinBestUrl to "asin-best-extract.sql",
@@ -27,7 +28,7 @@ fun main() = withContext { cx ->
             offerListingUrl to "asin-follow-extract.sql",
             categoryListUrl to "category-asin-extract.sql",
             keywordAsin to "keyword-asin-extract.sql"
-    ).filter { "asin" in it.second }
+    ).filter { "follow" in it.second }
             .map { it.first to SqlTemplate.load("sites/amazon/sql/extract/${it.second}") }
             .forEach { (url, sqlTemplate) ->
                 println()

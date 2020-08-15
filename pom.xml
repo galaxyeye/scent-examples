@@ -15,29 +15,32 @@
     <parent>
         <groupId>ai.platon</groupId>
         <artifactId>platon</artifactId>
-        <version>3</version>
+        <version>3.1</version>
     </parent>
 
     <artifactId>scent-examples</artifactId>
     <name>Scent Examples</name>
 
     <dependencies>
-
-        <!-- Internal dependency -->
         <dependency>
             <groupId>ai.platon.scent</groupId>
-            <artifactId>scent-app</artifactId>
+            <artifactId>scent-resources</artifactId>
             <version>${scent.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>ai.platon.scent</groupId>
+            <artifactId>scent-proxy</artifactId>
+            <version>${scent.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-core</artifactId>
+            <groupId>ai.platon.scent</groupId>
+            <artifactId>scent-protocol</artifactId>
+            <version>${scent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.platon.scent</groupId>
+            <artifactId>scent-beans</artifactId>
+            <version>${scent.version}</version>
         </dependency>
 
     </dependencies>
@@ -66,6 +69,6 @@
     </build>
 
     <properties>
-        <scent.version>1.6.2.1</scent.version>
+        <scent.version>1.6.3-SNAPSHOT</scent.version>
     </properties>
 </project>
