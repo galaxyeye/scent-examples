@@ -12,5 +12,4 @@ export authToken=af1639a924d7232099a037e9544cf43f
 export callbackUrl="http://localhost:8182/api/hello/echo"
 
 # The example target url for our xsql
-export xsqlTargetUrl="https://www.amazon.com/Etekcity-Multifunction-Stainless-Batteries-Included/dp/B0113UZJE2/ref=zg_bs_home-garden_21?_encoding=UTF8&psc=1&refRID=TS59NMS2K6A2PSXTTS4F"
-
+export fetchUrl='https://www.amazon.com/Disney-51394-Ariel-Necklace-Set/dp/B00BTX5926/ref=zg_bs_toys-and-games_1?_encoding=UTF8&psc=1&refRID=BX861MPVTN1E6SFC7C2K';

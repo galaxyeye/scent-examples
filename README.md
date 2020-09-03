@@ -16,22 +16,22 @@ The x-sql api is an async api, every call returns the id of the execution immedi
 ## Configs:
 We illustrate the configs in bash and sql files, but they have the similar forms in other languages.
 
-    cat bin/client/v163/config/config.sh
-    cat bin/client/v163/config/query.sql
+    cat bin/client/v163/bash/config/config.sh
+    cat bin/client/v163/bash/config/query.sql
 
 ## Bash
 
 Execute a X-SQL and polling the result:
 
-    ./bin/client/v163/xsql-status.sh
+    ./bin/client/v163/bash/xsql-status.sh
     
-to try another x-sql, just modify [query.sql](bin/client/v163/config/query.sql)
+to try another x-sql, just modify [query.sql](bin/client/v163/bash/config/query.sql)
 
 ## PHP
 
 Execute a X-SQL:
 
-    php bin/client/v163/curl.php
+    php bin/client/v163/php/curl.php
 
 ## Raw http
 A raw http request to execute a X-SQL:

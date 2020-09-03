@@ -8,7 +8,7 @@ sql=$(cat "$basedir/config/query.sql")
 # remove control characters
 sql=$(echo "$sql" | tr -s "[:cntrl:]" " ")
 # replace @url by the actual target url
-sql=${sql/@url/\'$xsqlTargetUrl\'}
+sql=${sql/@url/\'$fetchUrl\'}
 # build the json data to send
 json="{\"username\": \"$username\", \"authToken\": \"$authToken\", \"sql\": \"$sql\", \"callbackUrl\": \"$callbackUrl\"}"
 
