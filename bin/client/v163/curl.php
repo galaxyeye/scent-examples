@@ -23,14 +23,14 @@ $sql=array(
 );
 $json = json_encode($sql);
 
-# $url = 'http://119.45.149.30:8182/api/x/a/q';
-$url = 'http://localhost:8182/api/x/a/q';
+$url = 'http://119.45.149.30:8182/api/x/a/q';
+# $url = 'http://localhost:8182/api/x/a/q';
 $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($json))); // check if the length be correct
 curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
 curl_setopt($curl, CURLOPT_VERBOSE, true);
 
+curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($json))); // check if the length be correct
 $json_response = curl_exec($curl);
 print $json_response;
