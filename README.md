@@ -18,7 +18,7 @@ Execute a X-SQL:
     php bin/client/v163/curl.php
 
 ## raw http
-A http request to execute a X-SQL:
+A raw http request to execute a X-SQL:
 
     POST http://localhost:8182/api/x/a/q
     Content-Type: application/json
@@ -30,6 +30,6 @@ A http request to execute a X-SQL:
       "callbackUrl": "http://localhost:8182/api/hello/echo"
     }
     
-A http request to poll the result of a X-SQL:
+A raw http request to poll the result of a X-SQL:
 
     GET http://localhost:8182/api/x/a/status?id=156ad198-b603-483a-b651-40ab43817304&username=gJn6fUBh&authToken=af1639a924d7232099a037e9544cf43f
