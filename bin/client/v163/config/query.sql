@@ -11,3 +11,4 @@ select
     str_substring_after(dom_first_attr(dom, 'div > div > a i.a-icon-star', 'class'), ' a-star-') as ad_asin_score,
     dom_first_text(dom, 'div a:contains(out of 5 stars) ~ a[href~=reviews]') as ad_asin_reviews
 from load_and_select(@url, '#sims-consolidated-2_feature_div ol.a-carousel li');
+

@@ -3,7 +3,12 @@
     git clone https://github.com/galaxyeye/scent-examples.git
     cd scent-examples
 
-## bash
+## Bash
+
+Configs:
+
+    cat bin/client/v163/config/config.sh
+    cat bin/client/v163/config/query.sql
 
 Execute a X-SQL and polling the result:
 
@@ -11,13 +16,13 @@ Execute a X-SQL and polling the result:
     
 to try another x-sql, just modify [query.sql](bin/client/v163/config/query.sql)
 
-## php
+## PHP
 
 Execute a X-SQL:
 
     php bin/client/v163/curl.php
 
-## raw http
+## Raw http
 A raw http request to execute a X-SQL:
 
     POST http://localhost:8182/api/x/a/q
