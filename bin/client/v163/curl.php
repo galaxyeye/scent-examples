@@ -15,10 +15,16 @@ select
 from load_and_select('$fetchUrl', 'ol#zg-ordered-list > li.zg-item-immersion');
 EOF;
 
-$sql=array("sql" => $sql);
+$sql=array(
+    "username" => "gJn6fUBh",
+    "authToken" => "af1639a924d7232099a037e9544cf43f",
+    "sql" => $sql,
+    "callbackUrl" => "http://localhost:8182/api/hello/echo"
+);
 $json = json_encode($sql);
 
-$url = 'http://119.45.149.30:8182/api/x/sql/json';
+# $url = 'http://119.45.149.30:8182/api/x/a/q';
+$url = 'http://localhost:8182/api/x/a/q';
 $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($json))); // check if the length be correct

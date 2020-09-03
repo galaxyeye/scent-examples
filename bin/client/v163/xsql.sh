@@ -1,4 +1,8 @@
 #!/bin/bash
+username=gJn6fUBh
+authToken=af1639a924d7232099a037e9544cf43f
+# replace to your own callback url
+callbackUrl="http://localhost:8182/api/hello/echo"
 
 targetUrl="https://www.amazon.com/Etekcity-Multifunction-Stainless-Batteries-Included/dp/B0113UZJE2/ref=zg_bs_home-garden_21?_encoding=UTF8&psc=1&refRID=TS59NMS2K6A2PSXTTS4F"
 sql="
@@ -22,9 +26,9 @@ sql=$(echo "$sql" | tr -s "[:cntrl:]" " ")
 # replace @url by the actual target url
 sql=${sql/@url/\'$targetUrl\'}
 # build the json data to send
-json="{\"sql\": \"$sql\"}"
+json="{\"username\": \"$username\", \"authToken\": \"$authToken\", \"sql\": \"$sql\", \"callbackUrl\": \"$callbackUrl\"}"
 
 # echo $json
 
-host=119.45.149.30
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "$json" "http://$host:8182/api/x/sql/json"
+host=localhost
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "$json" "http://$host:8182/api/x/a/q"
