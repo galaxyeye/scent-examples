@@ -1,5 +1,8 @@
 <?php
 
+// Important: you have to use your own callbackUrl, we post the query result as a json object to this url
+// so your callbackUrl have to receive a GET request and application/json media type
+
 $fetchUrl='https://www.amazon.com/Best-Sellers-Toys-Games/zgbs/toys-and-games/ref=zg_bs_toys-and-games_home_all?pf_rd_p=089b8285-7691-4849-a7f5-b2fca56bf24a&pf_rd_s=center-1&pf_rd_t=2101&pf_rd_i=home&pf_rd_m=ATVPDKIKX0DER&pf_rd_r=7Z41QZGQ4X56MJK1CJV0&pf_rd_r=7Z41QZGQ4X56MJK1CJV0&pf_rd_p=089b8285-7691-4849-a7f5-b2fca56bf24a';
 $sql=<<<EOF
 select
