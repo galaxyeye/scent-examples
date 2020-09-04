@@ -1,12 +1,12 @@
-# X-SQL server client API
+# X-SQL client API
 
-The x-sql api is an async api, every call returns the id of the execution immediately.
+The x-sql query api is asynchronous, every query returns the id of the query immediately.
 
-* you can poll the result using this id
-* you have to specify your own callbackUrl, once we have the execution done, we post the result to this url
-* requirement for your callback handler: 
-  * method: GET
-  * media type: application/json
+* you CAN poll the result using this id, but it's optional
+* you MUST implement your callback url to receive the result, once we have the query done, we post the result back
+* your callback url have to:
+  * accept http method: GET
+  * accept http media type: application/json
 
 ## Startup
 
@@ -14,14 +14,14 @@ The x-sql api is an async api, every call returns the id of the execution immedi
     cd scent-examples
 
 ## Configs:
-We illustrate the configs in bash and sql files, but they have the similar forms in other languages.
+We show the config properties in bash and sql files, but they have the similar forms in other languages
 
     cat bin/client/v163/bash/config/config.sh
     cat bin/client/v163/bash/config/query.sql
 
 ## Bash
 
-Execute a X-SQL and polling the result:
+Execute an X-SQL and poll the result:
 
     ./bin/client/v163/bash/xsql-status.sh
     
@@ -29,12 +29,12 @@ to try another x-sql, just modify [query.sql](bin/client/v163/bash/config/query.
 
 ## PHP
 
-Execute a X-SQL:
+Execute an X-SQL:
 
     php bin/client/v163/php/curl.php
 
 ## Raw http
-A raw http request to execute a X-SQL:
+A raw http request to execute an X-SQL:
 
     POST http://localhost:8182/api/x/a/q
     Content-Type: application/json
@@ -46,6 +46,6 @@ A raw http request to execute a X-SQL:
       "callbackUrl": "http://localhost:8182/api/hello/echo"
     }
     
-A raw http request to poll the result of a X-SQL:
+A raw http request to poll the result of an X-SQL:
 
     GET http://localhost:8182/api/x/a/status?id=156ad198-b603-483a-b651-40ab43817304&username=gJn6fUBh&authToken=af1639a924d7232099a037e9544cf43f
