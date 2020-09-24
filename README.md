@@ -7,7 +7,7 @@ The x-sql query api is asynchronous, every query returns the id of the query imm
 * your callback url have to:
   * accept http method: GET
   * accept http media type: application/json
-  * see [Raw http](#Raw http) section for detail
+  * see [Raw http](#Raw http) section for details
 
 ## Startup
 
@@ -32,7 +32,7 @@ to try another x-sql, just modify [query.sql](bin/client/v163/bash/config/query.
 
 Execute an X-SQL:
 
-    php bin/client/v163/php/curl.php
+    php bin/client/v163/php/query.php
 
 ## Raw http
 A raw http request to execute an X-SQL:

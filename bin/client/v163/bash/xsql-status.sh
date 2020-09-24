@@ -13,7 +13,7 @@ while true; do
   result=$(curl -H "Accept: application/json" -X GET "$url")
   echo "$result"
 
-  if [[ $result != *"Not Found"* ]]; then
+  if [[ $result != *"Created"* ]]; then
     exit 0
   fi
   sleep 5s

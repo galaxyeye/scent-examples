@@ -1,17 +1,3 @@
-<?php
-
-/**
- *The x-sql api is an async api, every call returns the id of the execution immediately.
- *
- * * you can poll the result using this id
- * * you have to specify your own callbackUrl, once we have the execution done, we post the result to this url
- *   requirement for your callback handler:
- *   * method: GET
- *   * media type: application/json
- */
-
-$fetchUrl='https://www.amazon.com/Disney-51394-Ariel-Necklace-Set/dp/B00BTX5926/ref=zg_bs_toys-and-games_1?_encoding=UTF8&psc=1&refRID=BX861MPVTN1E6SFC7C2K';
-$sql=<<<EOF
 select
     dom_first_text(dom, '#productTitle') as `title`,
     dom_base_uri(dom) as `url`,
@@ -64,25 +50,4 @@ select
     dom_first_text(dom, 'table#histogramTable:expr(width > 100) td:contains(2 star) ~ td:contains(%)') as `score2percent`,
     dom_first_text(dom, 'table#histogramTable:expr(width > 100) td:contains(1 star) ~ td:contains(%)') as `score1percent`,
     dom_first_href(dom, '#reviews-medley-footer a') as `reviewsurl`
-from load_and_select('$fetchUrl', ':root body');
-EOF;
-
-$sql=array(
-    "username" => "gJn6fUBh",
-    "authToken" => "af1639a924d7232099a037e9544cf43f",
-    "sql" => $sql,
-    "callbackUrl" => "http://localhost:8182/api/hello/echo"
-);
-$json = json_encode($sql);
-
-$url = 'http://119.45.149.30:8182/api/x/a/q';
-# $url = 'http://localhost:8182/api/x/a/q';
-$curl = curl_init($url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
-curl_setopt($curl, CURLOPT_VERBOSE, true);
-
-curl_setopt($curl, CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-length:' . strlen($json))); // check if the length be correct
-$json_response = curl_exec($curl);
-print $json_response;
+from load_and_select(@url, ':root body');
