@@ -4,7 +4,7 @@ this="${BASH_SOURCE-$0}"
 basedir=$(dirname "$this")
 source "$basedir/config/config.sh"
 
-uuid=$(exec "$basedir/xsql.sh")
+uuid=$(exec "$basedir/detail/submit.sh")
 
 # change to your own pulsar server
 url="http://$host:8182/api/x/a/status?id=$uuid&username=$username&authToken=$authToken"

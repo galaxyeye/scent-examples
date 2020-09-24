@@ -18,15 +18,15 @@ The x-sql query api is asynchronous, every query returns the id of the query imm
 We show the config properties in bash and sql files, but they have the similar forms in other languages
 
     cat bin/client/v163/bash/config/config.sh
-    cat bin/client/v163/bash/config/query.sql
+    cat bin/client/v163/config/query.sql
 
 ## Bash
 
 Execute an X-SQL and poll the result:
 
-    ./bin/client/v163/bash/xsql-status.sh
+    ./bin/client/v163/bash/query.sh
     
-to try another x-sql, just modify [query.sql](bin/client/v163/bash/config/query.sql)
+to try another x-sql, just modify [query.sql](bin/client/v163/config/query.sql)
 
 ## PHP
 

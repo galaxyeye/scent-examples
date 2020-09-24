@@ -12,7 +12,7 @@
 
 require_once "detail/api.php";
 
-$fetchUrl='https://www.amazon.com/Disney-51394-Ariel-Necklace-Set/dp/B00BTX5926/ref=zg_bs_toys-and-games_1?_encoding=UTF8&psc=1&refRID=BX861MPVTN1E6SFC7C2K';
+$fetchUrl='https://www.amazon.com/dp/B07HF3X6Y4?psc=1';
 
 $sql = file_get_contents(dirname(__FILE__)."/../config/query.sql");
 $sql = str_replace("@url", "'" . $fetchUrl . "'", $sql);

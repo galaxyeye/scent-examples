@@ -1,9 +1,9 @@
 #!/bin/bash
 
 basedir=$(dirname "${BASH_SOURCE[0]}")
-source "$basedir/config/config.sh"
+source "$basedir/../config/config.sh"
 
-sql=$(cat "$basedir/config/query.sql")
+sql=$(cat "$basedir/../../config/query.sql")
 
 # remove control characters
 sql=$(echo "$sql" | tr -s "[:cntrl:]" " ")
