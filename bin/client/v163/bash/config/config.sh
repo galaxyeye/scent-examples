@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # The host of the API server
-export host=119.45.149.30
+if [[ "$host" = "" ]]; then
+  export host=119.45.149.30
+fi
 
 # Ask the administrator for your username and authToken
 export username=gJn6fUBh
