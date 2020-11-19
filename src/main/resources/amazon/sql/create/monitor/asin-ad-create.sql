@@ -4,7 +4,7 @@
 -- asin 所在页面 广告位 追踪
 CREATE TABLE `asin_ad` (
    `asin` VARCHAR(255) NULL COMMENT '商品asin编码',
-   `ad_asin_postion` varchar(255) DEFAULT NULL COMMENT '广告位置',
+   `ad_asin_position` varchar(255) DEFAULT NULL COMMENT '广告位置',
    `ad_asin` VARCHAR(255) NULL COMMENT '广告商品asin编码',
    `ad_asin_bsr` INT DEFAULT 0 NULL COMMENT '广告商品asin rank',
    `ad_asin_url` VARCHAR(255) NULL COMMENT '广告商品URL',
@@ -24,7 +24,7 @@ CREATE TABLE `asin_ad` (
 DROP TABLE IF EXISTS `asin_ad_sync`;
 CREATE TABLE `asin_ad_sync` (
     `asin` varchar(255) DEFAULT NULL COMMENT '商品asin编码',
-    `ad_asin_postion` varchar(255) DEFAULT NULL COMMENT '广告位置',
+    `ad_asin_position` varchar(255) DEFAULT NULL COMMENT '广告位置',
     `ad_asin` varchar(255) DEFAULT NULL COMMENT '广告商品asin编码',
     `ad_asin_bsr` varchar(255) DEFAULT NULL,
     `ad_asin_url` varchar(2048) DEFAULT NULL COMMENT '广告商品URL',

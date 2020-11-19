@@ -1,7 +1,0 @@
-# format:
-# portalUrl | portalUrl update period | listUrl update period | listUrl restrict css
-
-https://www.amazon.com/Best-Sellers/zgbs     -i 1h -ii 1h -ol "li a[href~=zgbs]"
-https://www.amazon.com/gp/new-releases       -i 1h -ii 1h -ol "li a[href~=new-releases]"
-https://www.amazon.com/gp/movers-and-shakers -i 1h -ii 1h -ol "li a[href~=movers-and-shakers]"
-https://www.amazon.com/gp/most-wished-for    -i 1h -ii 1h -ol "li a[href~=most-wished-for]"
