@@ -9,7 +9,7 @@ import ai.platon.pulsar.common.options.LoadOptions
 import ai.platon.pulsar.common.prependReadableClassName
 import ai.platon.pulsar.common.proxy.ProxyVendorUntrustedException
 import ai.platon.pulsar.persist.WebPage
-import ai.platon.scent.ScentContext
+import ai.platon.scent.ql.h2.context.ScentSQLContext
 import com.codahale.metrics.Gauge
 import com.codahale.metrics.SharedMetricRegistries
 import kotlinx.coroutines.*
@@ -22,7 +22,7 @@ import kotlin.math.abs
 open class StreamingSqlCrawler(
         private val urls: Sequence<String>,
         private val options: LoadOptions = LoadOptions.create(),
-        private val context: ScentContext
+        private val context: ScentSQLContext
 ): CommonSqlExtractor(context) {
     companion object {
         private val metricRegistry = SharedMetricRegistries.getOrCreate(AppConstants.DEFAULT_METRICS_NAME)
@@ -76,14 +76,13 @@ open class StreamingSqlCrawler(
                                 Strings.readableBytes(requiredMemory),
                                 Strings.readableBytes(abs(memoryRemaining))
                         )
-                        session.pulsarContext.clearCaches()
+                        session.context.clearCaches()
                         System.gc()
                     }
                     delay(1000)
                 }
 
                 if (!isAppActive) {
-
                     return@supervisorScope
                 }
 

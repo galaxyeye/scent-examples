@@ -1,15 +1,16 @@
 package ai.platon.scent.examples.misc.mysql
 
-import ai.platon.scent.common.SqlUtils
+import ai.platon.scent.common.sql.SqlUtils
 import java.sql.DriverManager
 
 object MysqlCon {
-    fun testConnect(args: Array<String>) = try {
+    fun testConnect() = try {
         Class.forName("com.mysql.cj.jdbc.Driver")
-        val con = DriverManager.getConnection("jdbc:mysql://47.103.79.201:3306/mallbigdata_us", "mytest", "123456@")
+        val url = "jdbc:mysql://mysql0:3306/mallbigdata_us_test?autoReconnect=true&DB_CLOSE_ON_EXIT=false"
+        val con = DriverManager.getConnection(url, "mytest", "123456@")
         // here sonoo is database name, root is username and password
         val stmt = con.createStatement()
-        val rs = stmt.executeQuery("select * from asin")
+        val rs = stmt.executeQuery("select 1+1, 2*6, 'end'")
         while (rs.next()) println(rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3))
         con.close()
     } catch (e: Exception) {
@@ -23,5 +24,5 @@ object MysqlCon {
 }
 
 fun main() {
-    MysqlCon.convertSql()
+    MysqlCon.testConnect()
 }

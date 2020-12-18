@@ -15,8 +15,7 @@
  */
 function submit($url, $sql) {
     $sql = array(
-        "username" => "gJn6fUBh",
-        "authToken" => "af1639a924d7232099a037e9544cf43f",
+        "authToken" => "gJn6fUBh-1-af1639a924d7232099a037e9544cf43f",
         "sql" => $sql,
         "callbackUrl" => "http://localhost:8182/api/hello/echo"
     );

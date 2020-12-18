@@ -4,6 +4,7 @@ import ai.platon.pulsar.common.AppContext
 import ai.platon.pulsar.crawl.parse.ParseFilters
 import ai.platon.pulsar.crawl.parse.html.ParseContext
 import ai.platon.pulsar.persist.WebPage
+import ai.platon.scent.common.sql.SqlTemplate
 import ai.platon.scent.context.ScentContexts
 import ai.platon.scent.parse.html.JdbcSinkSqlExtractor
 import kotlinx.coroutines.Dispatchers
@@ -20,12 +21,11 @@ open class AmazonStreamingSqlExtractor(val pages: Sequence<WebPage>) {
     val closed = AtomicBoolean()
     val numRunning = AtomicInteger()
     val isAppActive get() = !closed.get() && session.isActive
-    val sqlExtractor: JdbcSinkSqlExtractor get() = session.pulsarContext.getBean()
-    val parseFilters: ParseFilters get() = session.pulsarContext.getBean()
+    val sqlExtractor: JdbcSinkSqlExtractor get() = session.context.getBean()
+    val parseFilters: ParseFilters get() = session.context.getBean()
 
     init {
-        sqlExtractor.session = session.pulsarSession
-        sqlExtractor.sqlTemplateResource = "sites/amazon/sql/x-items-converted.sql"
+        sqlExtractor.sqlTemplate = SqlTemplate.load("sites/amazon/sql/x-items-converted.sql")
         parseFilters.addFirst(sqlExtractor)
     }
 
@@ -44,8 +44,8 @@ open class AmazonStreamingSqlExtractor(val pages: Sequence<WebPage>) {
                         val parseContext = ParseContext(page)
                         sqlExtractor.filter(parseContext)
                     }
-                    session.removeCache(page)
-                    session.removeCache(document)
+                    session.disableCache(page)
+                    session.disableCache(document)
                     numRunning.decrementAndGet()
                 }
 

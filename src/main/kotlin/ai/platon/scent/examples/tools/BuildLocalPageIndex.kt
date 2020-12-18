@@ -27,7 +27,7 @@ fun main() {
         val ol = indexDocument.selectFirst(".stage ol")
 
         val session = cx.createSession()
-        val webDb = session.pulsarContext.getBean<WebDb>()
+        val webDb = session.context.getBean<WebDb>()
         var i = 0
         webDb.scan("").asSequence()
                 .filterNot { it.url.contains("amazon.com") }

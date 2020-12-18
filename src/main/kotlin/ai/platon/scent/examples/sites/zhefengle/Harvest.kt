@@ -7,7 +7,6 @@ import ai.platon.scent.examples.common.WebHarvester
 class Harvest(context: ScentContext): WebHarvester(context) {
 
     val seeds = listOf(
-            "https://www.finishline.com/store/men/shoes/_/N-1737dkj?mnid=men_shoes",
             "https://www.eastbay.com/category/sport/baseball/mens/shoes.html",
             "https://www.calvinklein.us/en/womens-underwear-shop-all?ab=underwear_desktop_4#collection=bold-1981",
             "https://www.ralphlauren.com/men-clothing-polo-shirts?webcat=men%7Cclothing%7CPolo%20Shirts",
@@ -22,4 +21,6 @@ class Harvest(context: ScentContext): WebHarvester(context) {
     }
 }
 
-fun main() = withContext { Harvest(it).harvest() }
+fun main() = withContext {
+    Harvest(it).harvest()
+}

@@ -33,7 +33,7 @@ class DbScanner(
     }
 
     private fun scanSequence(): Sequence<WebPage> {
-        val webDb = session.pulsarContext.getBean<WebDb>()
+        val webDb = session.context.getBean<WebDb>()
         return webDb.scan(scanUrlPrefix, scanFields).asSequence()
                 .filter { it.key.contains("Best-Sellers") }
                 .filter { it.protocolStatus.isSuccess && it.content?.array()?.size ?: 0 > scanMinimumContentSize }

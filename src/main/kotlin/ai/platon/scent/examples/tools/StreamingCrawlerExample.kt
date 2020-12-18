@@ -7,10 +7,12 @@ import ai.platon.pulsar.crawl.Crawler
 import ai.platon.scent.ScentContext
 import ai.platon.scent.examples.common.StreamingSqlCrawler
 import ai.platon.scent.context.withContext
+import ai.platon.scent.ql.h2.context.ScentSQLContext
+import ai.platon.scent.ql.h2.context.withSQLContext
 import kotlinx.coroutines.runBlocking
 import java.nio.file.Paths
 
-class StreamingCrawler(val context: ScentContext): Crawler(context.pulsarContext) {
+class StreamingCrawlerExample(val context: ScentSQLContext): Crawler(context) {
     private val args = "-i 7d -ii 7d"
     private val options = LoadOptions.parse(args)
     private val links = LinkExtractors.fromDirectory(Paths.get("/tmp/pulsar-vincent/category/1625")).toList()
@@ -25,7 +27,7 @@ class StreamingCrawler(val context: ScentContext): Crawler(context.pulsarContext
 fun main() {
     Systems.loadAllProperties("application.properties")
 
-    withContext {
-        StreamingCrawler(it).run()
+    withSQLContext {
+        StreamingCrawlerExample(it).run()
     }
 }

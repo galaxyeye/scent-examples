@@ -21,7 +21,7 @@ $submitUrl = 'http://119.45.149.30:8182/api/x/a/q';
 $uuid = submit($submitUrl, $sql);
 # $url = 'http://localhost:8182/api/x/a/q';
 
-$queryUrl = "http://119.45.149.30:8182/api/x/a/status?id=$uuid&username=gJn6fUBh&authToken=af1639a924d7232099a037e9544cf43f";
+$queryUrl = "http://119.45.149.30:8182/api/x/a/status?id=$uuid&authToken=gJn6fUBh-1-af1639a924d7232099a037e9544cf43f";
 $output = query($queryUrl);
 while ($output['statusCode'] != 200) {
     print_r($output);

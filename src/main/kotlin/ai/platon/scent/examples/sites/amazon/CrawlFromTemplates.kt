@@ -1,6 +1,7 @@
 package ai.platon.scent.examples.sites.amazon
 
 import ai.platon.pulsar.common.AppPaths
+import ai.platon.pulsar.common.url.Hyperlink
 import ai.platon.pulsar.common.Systems
 import ai.platon.pulsar.common.config.CapabilityTypes
 import ai.platon.pulsar.common.options.LoadOptions
@@ -12,7 +13,7 @@ import kotlinx.coroutines.runBlocking
 
 class CrawlFromTemplates: Crawler() {
     private var round = 0
-    private val privacyManager = session.pulsarContext.getBean(MultiPrivacyContextManager::class)
+    private val privacyManager = session.context.getBean(MultiPrivacyContextManager::class)
 
     val seeds = listOf(
             "https://www.amazon.com/gp/browse.html?node=16713337011&ref_=nav_em_0_2_8_5_sbdshd_cameras"
@@ -58,11 +59,11 @@ class CrawlFromTemplates: Crawler() {
         val portalDocument = session.parse(portalPage)
         val links = portalDocument.select("a[href~=/dp/]") {
             it.attr("abs:href").substringBeforeLast("#")
-        }.toSet()
+        }.mapTo(mutableSetOf()) { Hyperlink(it) }
 
         val sb = StringBuilder("\n")
         links.forEachIndexed { j, l ->
-            sb.appendln(String.format("%-10s%s", "$j.", l))
+            sb.appendLine(String.format("%-10s%s", "$j.", l))
         }
         log.info(sb.toString())
         sb.setLength(0)
@@ -76,7 +77,7 @@ class CrawlFromTemplates: Crawler() {
             return
         }
 
-        val itemOptions = options.createItemOption()
+        val itemOptions = options.createItemOptions()
         runBlocking {
             StreamingCrawler(links.shuffled().asSequence(), itemOptions).run()
         }

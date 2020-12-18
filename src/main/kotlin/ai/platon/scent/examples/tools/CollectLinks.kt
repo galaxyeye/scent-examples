@@ -14,7 +14,7 @@ fun collectFromLogs() {
         println("$i.\t$link")
     }
 
-    val path = AppPaths.get("generated_links.txt")
+    val path = AppPaths.getTmp("generated_links.txt")
     Files.deleteIfExists(path)
     Files.write(path, links)
 

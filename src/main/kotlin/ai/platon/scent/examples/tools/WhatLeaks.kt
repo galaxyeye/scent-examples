@@ -5,7 +5,6 @@ import ai.platon.pulsar.common.config.CapabilityTypes
 import ai.platon.pulsar.common.config.Params
 import ai.platon.scent.tools.WhatLeaks
 import org.slf4j.LoggerFactory
-import kotlin.system.exitProcess
 
 fun main() {
     val log = LoggerFactory.getLogger(WhatLeaks::class.java)

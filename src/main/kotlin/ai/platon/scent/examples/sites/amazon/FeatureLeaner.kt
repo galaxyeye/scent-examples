@@ -9,7 +9,6 @@ import ai.platon.pulsar.persist.WebDb
 import ai.platon.pulsar.persist.WebPage
 import ai.platon.pulsar.persist.gora.generated.GWebPage
 import ai.platon.pulsar.protocol.browser.driver.WebDriverPoolManager
-import ai.platon.scent.analysis.data
 import ai.platon.scent.common.message.ScentMiscMessageWriter
 import ai.platon.scent.context.withContext
 import ai.platon.scent.dom.HarvestOptions
@@ -33,11 +32,11 @@ class FeatureLeaner(
 
     private val args = "-ic -i 10d -ii 70d -tl 40 -ol \"h2 a[href~=/dp/]\""
     private val options = HarvestOptions.parse(args).apply { diagnose = true; trustSamples = true }
-    private val portalUrls = LinkExtractors.fromResource("/amazon-categories.txt")
+    private val portalUrls = LinkExtractors.fromResource("/new-releases.txt")
     private val hyperPaths = ConcurrentLinkedQueue<HyperPath>()
-    private val webDb = session.pulsarContext.getBean<WebDb>()
-    private val driverManager = session.pulsarContext.getBean<WebDriverPoolManager>()
-    private val messageWriter get() = session.pulsarContext.getBean<ScentMiscMessageWriter>()
+    private val webDb = session.context.getBean<WebDb>()
+    private val driverManager = session.context.getBean<WebDriverPoolManager>()
+    private val messageWriter get() = session.context.getBean<ScentMiscMessageWriter>()
     private var round = 0
 
     fun run() {
@@ -70,7 +69,7 @@ class FeatureLeaner(
 
     fun loadPaths() {
         // NodePaths.load(hyperPaths)
-        val lines = ResourceLoader.readAllLines("/trusted-hyper-paths.txt")
+        val lines = ResourceLoader.readAllLines("trusted-hyper-paths.txt")
         lines.mapNotNull { HyperPath.parse(it) }.forEach { hyperPaths.add(it) }
     }
 
@@ -89,9 +88,9 @@ class FeatureLeaner(
     }
 
     fun learn(portalUrl: String) {
-        val group = runBlocking { session.harvest(portalUrl, options) }
-        group.tables.forEach { it.columns.forEach { hyperPaths.add(it.data.hyperPath) } }
-        session.buildAll(group, options)
+        val result = runBlocking { session.harvest(portalUrl, options) }
+        // group.tables.forEach { it.columns.forEach { hyperPaths.add(it.data.hyperPath) } }
+        session.buildAll(result.tableGroup, options)
     }
 
     private fun scanSequence(): Sequence<WebPage> {
@@ -147,10 +146,10 @@ class FeatureLeaner(
 
     private fun convertHyperPaths2Sql() {
         val sb = StringBuilder()
-        sb.appendln("select")
+        sb.appendLine("select")
         hyperPaths.iterator().asSequence().toList().joinTo(sb, ",\n") { "    dom_first_text(dom, '$it') as `${it.label}`" }
-        sb.appendln()
-        sb.appendln("from dom_select({{url}})")
+        sb.appendLine()
+        sb.appendLine("from dom_select({{url}})")
         println(sb.toString())
     }
 }

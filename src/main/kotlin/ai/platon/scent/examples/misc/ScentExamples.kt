@@ -46,7 +46,7 @@ object ScentExamples {
     fun validateConfig() {
         log.debug("config: " + i.sessionConfig.unbox().size())
         log.debug("config fallback: " + i.sessionConfig.fallbackConfig?.unbox()?.size())
-        log.debug("conf wrapped: " + MutableConfig(i.pulsarContext.unmodifiedConfig).unbox().size())
+        log.debug("conf wrapped: " + MutableConfig(i.context.unmodifiedConfig).unbox().size())
 
         log.debug("domain: " + i.sessionConfig.get(PULSAR_DOMAIN))
         log.debug("labels: " + i.sessionConfig.get(SCENT_CLASSIFIER_BLOCK_LABELS))
@@ -98,8 +98,8 @@ object ScentExamples {
     }
 
     fun truncate() {
-        i.pulsarContext.webDb.truncate()
-        i.pulsarContext.flush()
+        i.context.webDb.truncate()
+        i.context.flush()
     }
 
     fun run() {

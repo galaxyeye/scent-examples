@@ -1,5 +1,6 @@
 package ai.platon.scent.examples.misc
 
+import ai.platon.pulsar.common.url.Hyperlink
 import ai.platon.pulsar.common.Systems
 import ai.platon.pulsar.common.config.AppConstants
 import ai.platon.pulsar.common.config.CapabilityTypes
@@ -17,7 +18,7 @@ fun main() {
     Systems.setProperty(CapabilityTypes.FETCH_CONCURRENCY, 2 * AppConstants.FETCH_THREADS)
 
     val i = ScentContexts.createSession()
-    val webDb = i.pulsarContext.getBean<WebDb>()
+    val webDb = i.context.getBean<WebDb>()
     val scanUrlPrefix = ""
     val scanFields = listOf(GWebPage.Field.PROTOCOL_STATUS)
     val maxRecords = 50
@@ -25,7 +26,7 @@ fun main() {
 
     runBlocking {
         webDb.scan(scanUrlPrefix, scanFields).asSequence()
-                .map { it.url }
+                .map { Hyperlink(it.url) }
 //                .dropWhile { Instant.now() > stopTime }
                 .take(maxRecords)
                 .let { StreamingCrawler(it, options) }.run()

@@ -7,7 +7,7 @@ import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 
 class LeafCategory {
-    val categoryTreePath = "sites/amazon/category/hot/amazon-categories.txt"
+    val categoryTreePath = "sites/amazon/category/best-sellers/best-sellers.txt"
     private val dataDirectory = AppPaths.getTmp("category").resolve(DateTimes.formatNow("HHmm"))
     private val leafCategoriesPath = dataDirectory.resolve("leafCategories.txt")
 

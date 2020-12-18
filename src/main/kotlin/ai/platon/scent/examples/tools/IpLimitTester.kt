@@ -1,5 +1,6 @@
 package ai.platon.scent.examples.tools
 
+import ai.platon.pulsar.common.url.Hyperlink
 import ai.platon.pulsar.common.LinkExtractors
 import ai.platon.pulsar.common.config.CapabilityTypes
 import ai.platon.pulsar.common.options.LoadOptions
@@ -8,7 +9,6 @@ import ai.platon.pulsar.dom.select.collectNotNull
 import ai.platon.pulsar.persist.WebDb
 import ai.platon.pulsar.persist.WebPage
 import ai.platon.pulsar.persist.gora.generated.GWebPage
-import ai.platon.scent.ScentContext
 import ai.platon.scent.context.ScentContexts
 import kotlinx.coroutines.runBlocking
 import java.time.Duration
@@ -22,7 +22,7 @@ fun main() {
     // ProxyManager.enableDefaultProviders()
     // ProxyManager.disableProviders()
     val i = ScentContexts.createSession()
-    val webDb = i.pulsarContext.getBean<WebDb>()
+    val webDb = i.context.getBean<WebDb>()
     val scanUrlPrefix = "https://www.amazon.com/"
     val scanFields = listOf(GWebPage.Field.PROTOCOL_STATUS, GWebPage.Field.FETCH_TIME)
     val maxRecords = 5000
@@ -32,8 +32,9 @@ fun main() {
 
     val portalPages = ConcurrentLinkedQueue<WebPage>()
     runBlocking {
-        LinkExtractors.fromResource("/amazon-categories.txt")
+        LinkExtractors.fromResource("/new-releases.txt")
                 .asSequence()
+                .map { Hyperlink(it) }
                 .let { StreamingCrawler(it, options).apply { pageCollector = portalPages } }
                 .run()
     }
@@ -53,6 +54,4 @@ fun main() {
 //                .take(maxRecords)
 //                .let { StreamingCrawler(it, options) }.run()
 //    }
-
-    ScentContexts.shutdown()
 }

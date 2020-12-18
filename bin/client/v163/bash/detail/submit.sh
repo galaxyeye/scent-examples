@@ -1,16 +1,16 @@
 #!/bin/bash
 
 basedir=$(dirname "${BASH_SOURCE[0]}")
-source "$basedir/../config/config.sh"
+source "$basedir/../config.sh"
 
-sql=$(cat "$basedir/../../config/query.sql")
+sql=$(cat "$basedir/../query.sql")
 
 # remove control characters
 sql=$(echo "$sql" | tr -s "[:cntrl:]" " ")
 # replace @url by the actual target url
 sql=${sql/@url/\'$fetchUrl\'}
 # build the json data to send
-json="{\"username\": \"$username\", \"authToken\": \"$authToken\", \"sql\": \"$sql\", \"callbackUrl\": \"$callbackUrl\"}"
+json="{\"authToken\": \"$authToken\", \"sql\": \"$sql\", \"callbackUrl\": \"$callbackUrl\"}"
 
 # echo $json
 

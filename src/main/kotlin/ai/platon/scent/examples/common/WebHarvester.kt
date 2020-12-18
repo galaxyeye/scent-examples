@@ -11,6 +11,7 @@ import ai.platon.scent.dom.HarvestOptions
 import ai.platon.scent.dom.nodes.annotateNodes
 import com.google.common.collect.Lists
 import kotlinx.coroutines.runBlocking
+import java.nio.file.Files
 import java.time.Duration
 import java.time.Instant
 import java.util.concurrent.ConcurrentHashMap
@@ -192,7 +193,7 @@ open class WebHarvester(val context: ScentContext): Crawler() {
     fun arrangeDocument(portalUrl: String) {
         val taskName = AppPaths.fromUri(portalUrl)
 
-        val normUrl = i.normalize("$portalUrl $defaultArgs")
+        val normUrl = i.normalize(portalUrl, HarvestOptions.parse(defaultArgs))
         val options = normUrl.hOptions
         val portalPage = i.load(normUrl)
         val portalDocument = i.parse(portalPage)
@@ -224,11 +225,12 @@ open class WebHarvester(val context: ScentContext): Crawler() {
     fun harvest(session: ScentSession, url: String, options: HarvestOptions) {
         val start = Instant.now()
 
-        val group = runBlocking { session.harvest(url, options) }
-        session.buildAll(group, options)
+        val result = runBlocking { session.harvest(url, options) }
+        session.buildAll(result.tableGroup, options)
 
-//        val json = session.buildJson(group, options)
-//        println(json)
+        val json = session.buildJson(result.tableGroup, options)
+        val path = AppPaths.REPORT_DIR.resolve("harvest/corpus/last-page-tables.json")
+        Files.writeString(path, json)
 
         taskTimes[url] = Duration.between(start, Instant.now())
     }

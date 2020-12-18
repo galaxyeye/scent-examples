@@ -3,7 +3,7 @@ package ai.platon.scent.examples.sites.amazon
 import ai.platon.pulsar.common.DateTimes
 import ai.platon.pulsar.common.Systems
 import ai.platon.scent.ScentContext
-import ai.platon.scent.common.SqlUtils
+import ai.platon.scent.common.sql.SqlUtils
 import ai.platon.scent.context.withContext
 import ai.platon.scent.examples.common.Crawler
 import org.apache.commons.lang3.StringUtils
